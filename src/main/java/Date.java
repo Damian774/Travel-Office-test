@@ -3,6 +3,19 @@ import java.util.StringTokenizer;
 public class Date {
     private int day;
     private int month;
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
     private int year;
 
     public static Date createDate(String s,String dividers){

@@ -1,6 +1,7 @@
 public class Customer {
     private String name;
     private Address address;
+    private Trip trip;
 
     @Override
     public String toString() {
@@ -10,9 +11,6 @@ public class Customer {
     public String getName() {
         return name;
     }
-
-    private Trip trip;
-
 
     public Customer(String name){
         this.name=name;

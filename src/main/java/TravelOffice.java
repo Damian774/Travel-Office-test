@@ -45,14 +45,13 @@ public class TravelOffice {
     }
 
     Customer findCustomerByName(String name) {
-
-        for (Iterator<Customer> i = customerSet.iterator(); i.hasNext(); ) {
-            Customer element = i.next();
+        Customer customer = new Customer("NON_EXISTENT");
+        for (Customer element : customerSet) {
             if (element.getName().equals(name)) {
                 return element;
             }
         }
-        return null;
+        return customer;
     }
 
     boolean removeCustomer(Customer customer) {
