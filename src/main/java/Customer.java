@@ -14,6 +14,8 @@ public class Customer {
 
     public Customer(String name){
         this.name=name;
+        this.address= new Address("sample_street","sample_zip","sample_city");
+        this.trip= new AbroadTrip(Date.createDate("1:1:2018",":"),Date.createDate("10:10:2018",":"),"sample_destination",1500.50,150);
     }
 
     public void setAddress(Address address){

@@ -20,4 +20,9 @@ public class DomesticTrip extends Trip {
     public double getPrice() {
         return super.getPrice()-getOwnArrivalDiscount();
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"discount: "+getOwnArrivalDiscount();
+    }
 }

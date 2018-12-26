@@ -18,4 +18,9 @@ public class AbroadTrip extends Trip {
     public void setInsurance(double insurance) {
         this.insurance = insurance;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"insurance: "+getInsurance();
+    }
 }

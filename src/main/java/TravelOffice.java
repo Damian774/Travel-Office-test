@@ -54,6 +54,10 @@ public class TravelOffice {
         return customer;
     }
 
+    Trip findTripByName(String name) {
+        return tripMap.get(name);
+    }
+
     boolean removeCustomer(Customer customer) {
         for (Iterator<Customer> i = customerSet.iterator(); i.hasNext(); ) {
             Customer element = i.next();
