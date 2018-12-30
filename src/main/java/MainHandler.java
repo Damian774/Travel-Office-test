@@ -5,18 +5,39 @@ public class MainHandler implements UserInterface {
     private TravelOffice travelOffice;
     private boolean shouldExit;
     private Scanner scanner;
+    private String login;
+    private String password;
+    private boolean exitProgram;
 
     MainHandler() {
         travelOffice = new TravelOffice();
         boolean shouldExit = false;
         scanner = new Scanner(System.in);
+        exitProgram = false;
 
     }
 
-    public void startGui() {
+    public void startLogin(){
+        System.out.println("Login panel\n\n");
+        System.out.print("Your customer name: ");
+        login = scanner.nextLine();
+        if(login.equals("admin")) {
+            System.out.println("PASSWORD: ");
+            password = scanner.nextLine();
+            if(login.equals("admin") && password.equals("admin")){ startAdminGui();} else System.out.println("Incorrect password");
+        }else{
+        Customer customer1 = travelOffice.findCustomerByName(login);
+        if(customer1.getName().equals("NON_EXISTENT")) {
+            System.out.println("\n Customer does not exist\n\n");
+        } else startCustomerGui();
+
+
+        }
+    }
+    public void startAdminGui() {
         do {
             System.out.println(
-                    "\n\t1.Add client\n\t2.Add trip\n\t3.Assign trip to client\n\t4.Remove client\n\t5.Remove trip\n\t6.Show clients\n\t7.Show trips\n\t8.Exit\n"
+                    "\n\t1.Add client\n\t2.Add trip\n\t3.Assign trip to client\n\t4.Remove client\n\t5.Remove trip\n\t6.Show clients\n\t7.Show trips\n\t8.Logout\n\t9.Exit program\n"
             );
 
 
@@ -47,6 +68,32 @@ public class MainHandler implements UserInterface {
                     showTrips();
                     break;
                 case 8:
+                    exit();
+
+                    break;
+                case 9:
+                    exitProgram=true;
+                    exit();
+            }
+
+        } while (shouldExit == false);
+
+    }
+
+    public void startCustomerGui(){
+        do {
+            System.out.println(
+                    "\n\t1.Show my trips\n\t2.Logout\n"
+            );
+
+
+            System.out.print("Your pick: ");
+            switch (Integer.parseInt(scanner.nextLine())) {
+                case 1:
+                    System.out.println(travelOffice.findCustomerByName(login).toString());
+
+                    break;
+                case 2:
                     exit();
 
                     break;
@@ -139,8 +186,14 @@ public class MainHandler implements UserInterface {
         }
     }
 
+    public boolean getShouldExitProgram(){
+        return exitProgram;
+    }
+
     @Override
     public void exit() {
+        login=null;
+        password=null;
         shouldExit = true;
     }
 
