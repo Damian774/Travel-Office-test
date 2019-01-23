@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class MainHandler implements UserInterface {
@@ -18,6 +19,23 @@ public class MainHandler implements UserInterface {
     }
 
     public void startLogin(){
+
+        try{
+            FileInputStream saveFile1 = new FileInputStream("TripMap.sav");
+            ObjectInputStream save1 = new ObjectInputStream(saveFile1);
+            travelOffice.tripMap = (Map<String,Trip>) save1.readObject();
+            save1.close();
+
+            FileInputStream saveFile2 = new FileInputStream("CustomerSet.sav");
+            ObjectInputStream save2 = new ObjectInputStream(saveFile2);
+            travelOffice.customerSet = (Set<Customer>) save2.readObject();
+            save2.close();
+        }
+        catch(Exception exc){
+            System.out.println("No saved files yet");
+        }
+
+
         System.out.println("Login panel\n\n");
         System.out.print("Your customer name: ");
         login = scanner.nextLine();
@@ -181,7 +199,7 @@ public class MainHandler implements UserInterface {
         for (HashMap.Entry entry : travelOffice.getAllTrips().entrySet()) {
             String key = (String) entry.getKey();
             Trip value = (Trip) entry.getValue();
-            System.out.println(key + value.toString());
+            System.out.println("\t"+key + value.toString());
 
         }
     }
@@ -192,6 +210,24 @@ public class MainHandler implements UserInterface {
 
     @Override
     public void exit() {
+
+        try{
+            FileOutputStream saveFile1=new FileOutputStream("TripMap.sav");
+            ObjectOutputStream save1 = new ObjectOutputStream(saveFile1);
+            save1.writeObject(travelOffice.tripMap);
+            save1.close();
+
+            FileOutputStream saveFile2=new FileOutputStream("CustomerSet.sav");
+            ObjectOutputStream save2 = new ObjectOutputStream(saveFile2);
+            save2.writeObject(travelOffice.customerSet);
+            save2.close();
+        }
+        catch(Exception exc){
+            exc.printStackTrace();
+        }
+
+
+
         login=null;
         password=null;
         shouldExit = true;

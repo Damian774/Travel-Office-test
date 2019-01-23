@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public abstract class Trip {
+public abstract class Trip  implements Serializable {
     private Date start;
     private Date end;
     private String destination;

@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class TravelOffice {
+public class TravelOffice{
 
-    private Set<Customer> customerSet;
-    private Map<String, Trip> tripMap;
+    public Set<Customer> customerSet;
+    public Map<String, Trip> tripMap;
 
     @Override
     public String toString() {
